@@ -104,6 +104,12 @@ class User:
         else:
             self.browser = None
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        self.closeBrowser()
+
     def configureFirefox(self) -> FirefoxService:
         """Configure options and profile for firefox."""
         self.options = FirefoxOptions()

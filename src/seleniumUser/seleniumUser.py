@@ -167,6 +167,7 @@ class User:
             envPaths = envPath.split(";")
         else:
             envPaths = envPath.split(":")
+            driver = driver[: driver.find(".")]
         for path in envPaths:
             if (Path(path) / driver).exists():
                 self.driverPath = Path(path) / driver
@@ -191,7 +192,7 @@ class User:
                     self.driverPath = child / driver
                     found = True
         if not found:
-            raise Exception(f"Could not find {driver}")
+            warn(f"Could not find {driver}")
 
     def setImplicitWait(self, waitTime: int = None):
         """Sets to default time if no arg given."""
